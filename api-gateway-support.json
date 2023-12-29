@@ -1,0 +1,999 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Hello API Platform",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "\/",
+      "description": ""
+    }
+  ],
+  "paths": {
+    "\/api\/books": {
+      "get": {
+        "operationId": "api_books_get_collection",
+        "tags": [
+          "Book"
+        ],
+        "responses": {
+          "200": {
+            "description": "Book collection",
+            "content": {
+              "application\/ld+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "hydra:member": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#\/components\/schemas\/Book.jsonld"
+                      }
+                    },
+                    "hydra:totalItems": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "hydra:view": {
+                      "type": "object",
+                      "properties": {
+                        "@id": {
+                          "type": "string",
+                          "format": "iri-reference"
+                        },
+                        "@type": {
+                          "type": "string"
+                        },
+                        "hydra:first": {
+                          "type": "string",
+                          "format": "iri-reference"
+                        },
+                        "hydra:last": {
+                          "type": "string",
+                          "format": "iri-reference"
+                        },
+                        "hydra:previous": {
+                          "type": "string",
+                          "format": "iri-reference"
+                        },
+                        "hydra:next": {
+                          "type": "string",
+                          "format": "iri-reference"
+                        }
+                      },
+                      "example": {
+                        "@id": "string",
+                        "type": "string",
+                        "hydra:first": "string",
+                        "hydra:last": "string",
+                        "hydra:previous": "string",
+                        "hydra:next": "string"
+                      }
+                    },
+                    "hydra:search": {
+                      "type": "object",
+                      "properties": {
+                        "@type": {
+                          "type": "string"
+                        },
+                        "hydra:template": {
+                          "type": "string"
+                        },
+                        "hydra:variableRepresentation": {
+                          "type": "string"
+                        },
+                        "hydra:mapping": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "@type": {
+                                "type": "string"
+                              },
+                              "variable": {
+                                "type": "string"
+                              },
+                              "property": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "required": {
+                                "type": "boolean"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "hydra:member"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "summary": "Retrieves the collection of Book resources.",
+        "description": "Retrieves the collection of Book resources.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The collection page number",
+            "required": false,
+            "deprecated": false,
+            "allowEmptyValue": true,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "style": "form",
+            "explode": false,
+            "allowReserved": false
+          }
+        ],
+        "deprecated": false
+      },
+      "post": {
+        "operationId": "api_books_post",
+        "tags": [
+          "Book"
+        ],
+        "responses": {
+          "201": {
+            "description": "Book resource created",
+            "content": {
+              "application\/ld+json": {
+                "schema": {
+                  "$ref": "#\/components\/schemas\/Book.jsonld"
+                }
+              }
+            },
+            "links": {}
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "422": {
+            "description": "Unprocessable entity"
+          }
+        },
+        "summary": "Creates a Book resource.",
+        "description": "Creates a Book resource.",
+        "parameters": [],
+        "requestBody": {
+          "description": "The new Book resource",
+          "content": {
+            "application\/ld+json": {
+              "schema": {
+                "$ref": "#\/components\/schemas\/Book.jsonld"
+              }
+            }
+          },
+          "required": true
+        },
+        "deprecated": false
+      },
+      "parameters": []
+    },
+    "\/api\/books\/{id}": {
+      "get": {
+        "operationId": "api_books_id_get",
+        "tags": [
+          "Book"
+        ],
+        "responses": {
+          "200": {
+            "description": "Book resource",
+            "content": {
+              "application\/ld+json": {
+                "schema": {
+                  "$ref": "#\/components\/schemas\/Book.jsonld"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          }
+        },
+        "summary": "Retrieves a Book resource.",
+        "description": "Retrieves a Book resource.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Book identifier",
+            "required": true,
+            "deprecated": false,
+            "allowEmptyValue": false,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple",
+            "explode": false,
+            "allowReserved": false
+          }
+        ],
+        "deprecated": false
+      },
+      "put": {
+        "operationId": "api_books_id_put",
+        "tags": [
+          "Book"
+        ],
+        "responses": {
+          "200": {
+            "description": "Book resource updated",
+            "content": {
+              "application\/ld+json": {
+                "schema": {
+                  "$ref": "#\/components\/schemas\/Book.jsonld"
+                }
+              }
+            },
+            "links": {}
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "422": {
+            "description": "Unprocessable entity"
+          },
+          "404": {
+            "description": "Resource not found"
+          }
+        },
+        "summary": "Replaces the Book resource.",
+        "description": "Replaces the Book resource.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Book identifier",
+            "required": true,
+            "deprecated": false,
+            "allowEmptyValue": false,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple",
+            "explode": false,
+            "allowReserved": false
+          }
+        ],
+        "requestBody": {
+          "description": "The updated Book resource",
+          "content": {
+            "application\/ld+json": {
+              "schema": {
+                "$ref": "#\/components\/schemas\/Book.jsonld"
+              }
+            }
+          },
+          "required": true
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "operationId": "api_books_id_delete",
+        "tags": [
+          "Book"
+        ],
+        "responses": {
+          "204": {
+            "description": "Book resource deleted"
+          },
+          "404": {
+            "description": "Resource not found"
+          }
+        },
+        "summary": "Removes the Book resource.",
+        "description": "Removes the Book resource.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Book identifier",
+            "required": true,
+            "deprecated": false,
+            "allowEmptyValue": false,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple",
+            "explode": false,
+            "allowReserved": false
+          }
+        ],
+        "deprecated": false
+      },
+      "patch": {
+        "operationId": "api_books_id_patch",
+        "tags": [
+          "Book"
+        ],
+        "responses": {
+          "200": {
+            "description": "Book resource updated",
+            "content": {
+              "application\/ld+json": {
+                "schema": {
+                  "$ref": "#\/components\/schemas\/Book.jsonld"
+                }
+              }
+            },
+            "links": {}
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "422": {
+            "description": "Unprocessable entity"
+          },
+          "404": {
+            "description": "Resource not found"
+          }
+        },
+        "summary": "Updates the Book resource.",
+        "description": "Updates the Book resource.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Book identifier",
+            "required": true,
+            "deprecated": false,
+            "allowEmptyValue": false,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple",
+            "explode": false,
+            "allowReserved": false
+          }
+        ],
+        "requestBody": {
+          "description": "The updated Book resource",
+          "content": {
+            "application\/merge-patch+json": {
+              "schema": {
+                "$ref": "#\/components\/schemas\/Book"
+              }
+            }
+          },
+          "required": true
+        },
+        "deprecated": false
+      },
+      "parameters": []
+    },
+    "\/api\/reviews": {
+      "get": {
+        "operationId": "api_reviews_get_collection",
+        "tags": [
+          "Review"
+        ],
+        "responses": {
+          "200": {
+            "description": "Review collection",
+            "content": {
+              "application\/ld+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "hydra:member": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#\/components\/schemas\/Review.jsonld"
+                      }
+                    },
+                    "hydra:totalItems": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "hydra:view": {
+                      "type": "object",
+                      "properties": {
+                        "@id": {
+                          "type": "string",
+                          "format": "iri-reference"
+                        },
+                        "@type": {
+                          "type": "string"
+                        },
+                        "hydra:first": {
+                          "type": "string",
+                          "format": "iri-reference"
+                        },
+                        "hydra:last": {
+                          "type": "string",
+                          "format": "iri-reference"
+                        },
+                        "hydra:previous": {
+                          "type": "string",
+                          "format": "iri-reference"
+                        },
+                        "hydra:next": {
+                          "type": "string",
+                          "format": "iri-reference"
+                        }
+                      },
+                      "example": {
+                        "@id": "string",
+                        "type": "string",
+                        "hydra:first": "string",
+                        "hydra:last": "string",
+                        "hydra:previous": "string",
+                        "hydra:next": "string"
+                      }
+                    },
+                    "hydra:search": {
+                      "type": "object",
+                      "properties": {
+                        "@type": {
+                          "type": "string"
+                        },
+                        "hydra:template": {
+                          "type": "string"
+                        },
+                        "hydra:variableRepresentation": {
+                          "type": "string"
+                        },
+                        "hydra:mapping": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "@type": {
+                                "type": "string"
+                              },
+                              "variable": {
+                                "type": "string"
+                              },
+                              "property": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "required": {
+                                "type": "boolean"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "hydra:member"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "summary": "Retrieves the collection of Review resources.",
+        "description": "Retrieves the collection of Review resources.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The collection page number",
+            "required": false,
+            "deprecated": false,
+            "allowEmptyValue": true,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "style": "form",
+            "explode": false,
+            "allowReserved": false
+          }
+        ],
+        "deprecated": false
+      },
+      "post": {
+        "operationId": "api_reviews_post",
+        "tags": [
+          "Review"
+        ],
+        "responses": {
+          "201": {
+            "description": "Review resource created",
+            "content": {
+              "application\/ld+json": {
+                "schema": {
+                  "$ref": "#\/components\/schemas\/Review.jsonld"
+                }
+              }
+            },
+            "links": {}
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "422": {
+            "description": "Unprocessable entity"
+          }
+        },
+        "summary": "Creates a Review resource.",
+        "description": "Creates a Review resource.",
+        "parameters": [],
+        "requestBody": {
+          "description": "The new Review resource",
+          "content": {
+            "application\/ld+json": {
+              "schema": {
+                "$ref": "#\/components\/schemas\/Review.jsonld"
+              }
+            }
+          },
+          "required": true
+        },
+        "deprecated": false
+      },
+      "parameters": []
+    },
+    "\/api\/reviews\/{id}": {
+      "get": {
+        "operationId": "api_reviews_id_get",
+        "tags": [
+          "Review"
+        ],
+        "responses": {
+          "200": {
+            "description": "Review resource",
+            "content": {
+              "application\/ld+json": {
+                "schema": {
+                  "$ref": "#\/components\/schemas\/Review.jsonld"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          }
+        },
+        "summary": "Retrieves a Review resource.",
+        "description": "Retrieves a Review resource.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Review identifier",
+            "required": true,
+            "deprecated": false,
+            "allowEmptyValue": false,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple",
+            "explode": false,
+            "allowReserved": false
+          }
+        ],
+        "deprecated": false
+      },
+      "put": {
+        "operationId": "api_reviews_id_put",
+        "tags": [
+          "Review"
+        ],
+        "responses": {
+          "200": {
+            "description": "Review resource updated",
+            "content": {
+              "application\/ld+json": {
+                "schema": {
+                  "$ref": "#\/components\/schemas\/Review.jsonld"
+                }
+              }
+            },
+            "links": {}
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "422": {
+            "description": "Unprocessable entity"
+          },
+          "404": {
+            "description": "Resource not found"
+          }
+        },
+        "summary": "Replaces the Review resource.",
+        "description": "Replaces the Review resource.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Review identifier",
+            "required": true,
+            "deprecated": false,
+            "allowEmptyValue": false,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple",
+            "explode": false,
+            "allowReserved": false
+          }
+        ],
+        "requestBody": {
+          "description": "The updated Review resource",
+          "content": {
+            "application\/ld+json": {
+              "schema": {
+                "$ref": "#\/components\/schemas\/Review.jsonld"
+              }
+            }
+          },
+          "required": true
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "operationId": "api_reviews_id_delete",
+        "tags": [
+          "Review"
+        ],
+        "responses": {
+          "204": {
+            "description": "Review resource deleted"
+          },
+          "404": {
+            "description": "Resource not found"
+          }
+        },
+        "summary": "Removes the Review resource.",
+        "description": "Removes the Review resource.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Review identifier",
+            "required": true,
+            "deprecated": false,
+            "allowEmptyValue": false,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple",
+            "explode": false,
+            "allowReserved": false
+          }
+        ],
+        "deprecated": false
+      },
+      "patch": {
+        "operationId": "api_reviews_id_patch",
+        "tags": [
+          "Review"
+        ],
+        "responses": {
+          "200": {
+            "description": "Review resource updated",
+            "content": {
+              "application\/ld+json": {
+                "schema": {
+                  "$ref": "#\/components\/schemas\/Review.jsonld"
+                }
+              }
+            },
+            "links": {}
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "422": {
+            "description": "Unprocessable entity"
+          },
+          "404": {
+            "description": "Resource not found"
+          }
+        },
+        "summary": "Updates the Review resource.",
+        "description": "Updates the Review resource.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Review identifier",
+            "required": true,
+            "deprecated": false,
+            "allowEmptyValue": false,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple",
+            "explode": false,
+            "allowReserved": false
+          }
+        ],
+        "requestBody": {
+          "description": "The updated Review resource",
+          "content": {
+            "application\/merge-patch+json": {
+              "schema": {
+                "$ref": "#\/components\/schemas\/Review"
+              }
+            }
+          },
+          "required": true
+        },
+        "deprecated": false
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {
+      "Book": {
+        "type": "object",
+        "description": "A book.",
+        "deprecated": false,
+        "properties": {
+          "id": {
+            "description": "The ID of this book.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "isbn": {
+            "description": "The ISBN of this book (or null if doesn\u0027t have one).",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "title": {
+            "description": "The title of this book.",
+            "type": "string"
+          },
+          "description": {
+            "description": "The description of this book.",
+            "type": "string"
+          },
+          "author": {
+            "description": "The author of this book.",
+            "type": "string"
+          },
+          "publicationDate": {
+            "description": "The publication date of this book.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "reviews": {
+            "description": "Available reviews for this book.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "iri-reference"
+            }
+          }
+        }
+      },
+      "Review": {
+        "type": "object",
+        "description": "A review of a book.",
+        "deprecated": false,
+        "properties": {
+          "id": {
+            "description": "The ID of this review.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "rating": {
+            "description": "The rating of this review (between 0 and 5).",
+            "type": "integer"
+          },
+          "body": {
+            "description": "The body of the review.",
+            "type": "string"
+          },
+          "author": {
+            "description": "The author of the review.",
+            "type": "string"
+          },
+          "publicationDate": {
+            "description": "The date of publication of this review.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "book": {
+            "description": "The book this review is about.",
+            "owl:maxCardinality": 1,
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "iri-reference"
+          }
+        }
+      },
+      "Bookjsonld": {
+        "type": "object",
+        "description": "A book.",
+        "deprecated": false,
+        "properties": {
+          "@context": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "@vocab": {
+                    "type": "string"
+                  },
+                  "hydra": {
+                    "type": "string",
+                    "enum": [
+                      "http:\/\/www.w3.org\/ns\/hydra\/core#"
+                    ]
+                  }
+                },
+                "required": [
+                  "@vocab",
+                  "hydra"
+                ],
+                "additionalProperties": true
+              }
+            ]
+          },
+          "@id": {
+            "type": "string"
+          },
+          "@type": {
+            "type": "string"
+          },
+          "id": {
+            "description": "The ID of this book.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "isbn": {
+            "description": "The ISBN of this book (or null if doesn\u0027t have one).",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "title": {
+            "description": "The title of this book.",
+            "type": "string"
+          },
+          "description": {
+            "description": "The description of this book.",
+            "type": "string"
+          },
+          "author": {
+            "description": "The author of this book.",
+            "type": "string"
+          },
+          "publicationDate": {
+            "description": "The publication date of this book.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "reviews": {
+            "description": "Available reviews for this book.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "iri-reference"
+            }
+          }
+        }
+      },
+      "Reviewjsonld": {
+        "type": "object",
+        "description": "A review of a book.",
+        "deprecated": false,
+        "properties": {
+          "@context": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "@vocab": {
+                    "type": "string"
+                  },
+                  "hydra": {
+                    "type": "string",
+                    "enum": [
+                      "http:\/\/www.w3.org\/ns\/hydra\/core#"
+                    ]
+                  }
+                },
+                "required": [
+                  "@vocab",
+                  "hydra"
+                ],
+                "additionalProperties": true
+              }
+            ]
+          },
+          "@id": {
+            "type": "string"
+          },
+          "@type": {
+            "type": "string"
+          },
+          "id": {
+            "description": "The ID of this review.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "rating": {
+            "description": "The rating of this review (between 0 and 5).",
+            "type": "integer"
+          },
+          "body": {
+            "description": "The body of the review.",
+            "type": "string"
+          },
+          "author": {
+            "description": "The author of the review.",
+            "type": "string"
+          },
+          "publicationDate": {
+            "description": "The date of publication of this review.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "book": {
+            "description": "The book this review is about.",
+            "owl:maxCardinality": 1,
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "iri-reference"
+          }
+        }
+      }
+    },
+    "responses": {},
+    "parameters": {},
+    "examples": {},
+    "requestBodies": {},
+    "headers": {},
+    "securitySchemes": {}
+  },
+  "security": [],
+  "tags": [],
+  "basePath": "\/"
+}
